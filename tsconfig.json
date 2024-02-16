@@ -16,6 +16,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@entities": ["src/entities"],
+      "@entities/*": ["src/entities/*"],
+      "@libs/commons": ["libs/commons/src"],
+      "@libs/commons/*": ["libs/commons/src/*"],
+      "@libs/helpers": ["libs/helpers"],
+      "@libs/helpers/*": ["libs/helpers/*"]
+    }
   }
 }
