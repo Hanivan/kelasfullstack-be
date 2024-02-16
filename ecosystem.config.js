@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'api',
+      name: 'api-mini-socmed',
       script: 'dist/main.js',
       watch: ['./dist'],
       autorestart: true,
