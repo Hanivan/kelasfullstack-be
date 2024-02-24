@@ -1,6 +1,7 @@
+import { UsersEntity } from '@entities/users.entity';
 import { Exclude, Expose, Transform } from 'class-transformer';
 
-export class UsersDto {
+export class UsersDto implements UsersEntity {
   @Transform(({ value }) => Number(value))
   @Expose()
   id: BigInt;
@@ -25,6 +26,9 @@ export class UsersDto {
 
   @Expose()
   avatar_url: string;
+
+  @Expose()
+  cover_url: string;
 
   @Exclude()
   remember_token: string;

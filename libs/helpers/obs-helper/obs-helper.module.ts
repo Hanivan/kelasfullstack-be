@@ -5,6 +5,7 @@ import {
   Module,
   ModuleMetadata,
 } from '@nestjs/common';
+import { EncryptionModule } from '../encryption/encryption.module';
 import { ObsHelperService } from './obs-helper.service';
 
 export interface ObsHelperOptions {
@@ -19,6 +20,7 @@ type HuaweiObsHelperAsyncOptions = Pick<ModuleMetadata, 'imports'> &
   Pick<FactoryProvider<ObsHelperOptions>, 'useFactory' | 'inject'>;
 
 @Module({
+  imports: [EncryptionModule],
   providers: [ObsHelperService],
   exports: [ObsHelperService],
 })

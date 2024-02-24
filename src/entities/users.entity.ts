@@ -34,6 +34,9 @@ export class UsersEntity {
   avatar_url: string;
 
   @Column({ nullable: true })
+  cover_url: string;
+
+  @Column({ nullable: true })
   remember_token: string;
 
   @Column({ type: 'tinyint' })

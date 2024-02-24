@@ -1,5 +1,6 @@
 import { UsersEntity } from '@entities/users.entity';
 import { EnvKey } from '@libs/commons/constant';
+import { EncryptionModule } from '@libs/helpers/encryption/encryption.module';
 import { ObsHelperModule } from '@libs/helpers/obs-helper/obs-helper.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -10,6 +11,7 @@ import { UsersService } from './users.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UsersEntity]),
+    EncryptionModule,
     ObsHelperModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
