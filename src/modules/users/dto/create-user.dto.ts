@@ -31,11 +31,11 @@ export class CreateUserDto {
 
   @IsString()
   @IsOptional()
-  avatar_url: string;
+  avatar_url: string; // will set at service layer
 
   @IsString()
   @IsOptional()
-  remember_token: string;
+  cover_url: string; // will set at service layer
 
   @Transform(formDatasStringBooleanParse)
   @IsBoolean()

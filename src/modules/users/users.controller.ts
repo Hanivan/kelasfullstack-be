@@ -11,10 +11,10 @@ import {
   Patch,
   Post,
   Query,
-  UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { PageOptionsDto } from 'src/dtos/pagination.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -42,22 +42,25 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @UseInterceptors(FileInterceptor('avatar'))
+  @UseInterceptors(AnyFilesInterceptor({ limits: { files: 2 } }))
   update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @UploadedFile(
+    @UploadedFiles(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 3145728 }), // 3Mb
+          new MaxFileSizeValidator({
+            maxSize: 3145728,
+            message: 'file size should not exceed 3Mb',
+          }), // 3Mb
           new FileTypeValidator({ fileType: /(jpg|jpeg|png)$/i }),
         ],
+        fileIsRequired: false,
       }),
     )
-    avatar: Express.Multer.File,
+    userAttachment: Express.Multer.File[],
   ) {
-    console.log(avatar, updateUserDto);
-    return this.usersService.update(+id, updateUserDto, avatar);
+    return this.usersService.update(+id, updateUserDto, userAttachment);
   }
 
   @Delete(':id')
